@@ -1,0 +1,12 @@
+$someColor: #0051ff;
+
+.test {
+  color: $someColor;
+}
+
+nav{
+  i{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
