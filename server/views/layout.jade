@@ -1,0 +1,27 @@
+doctype html
+html(ng-app='myApp')
+	head
+		title= title
+		link(rel='stylesheet', href='/css/foundation.css')
+		link(rel='stylesheet', href='/css/foundation-icons.css')
+		link(rel='stylesheet', href='/css/style.css')
+		script(src='/js/libs/modernizr.js')
+	body
+		block content
+
+		script(src='/js/libs/jquery-2.0.3.js')
+		script(src='/js/libs/foundation.min.js')
+		script.
+			$(document).foundation();
+		script(src='/js/libs/angular.js')
+		script(src='/js/libs/angular-resource.js')
+		script(src='/js/libs/angular-route.js')
+		script(src='/js/app.js')
+		script(src='/js/controllers/AppCtrl.js')
+		script(src='/js/controllers/HomeCtrl.js')
+		script(src='/js/controllers/ItemsCtrl.js')
+		script(src='/js/controllers/LoginCtrl.js')
+		script(src='/js/services/global.js')
+		script(src='/js/services/items.js')
+		script(src='/js/filters.js')
+		script(src='/js/directives.js')

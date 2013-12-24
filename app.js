@@ -1,39 +1,19 @@
-/*global VARIABLE_NAME:false */
 'use strict';
+//Fallback to make sure an environment is set
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
-var express = require('express');
-var routes = require('./routes');
-var api = require('./routes/api');
-var http = require('http');
-var path = require('path');
+//Initialize database connection
+require('./config/db').initialize();
 
-var app = express();
+//Configure express, routing and api
+var app = require('express')();
+require('./config/express')(app);
+require('./config/routes')(app);
 
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.cookieParser('your secret here'));
-app.use(express.session());
-app.use(app.router);
-app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
-app.use(express.static(path.join(__dirname, 'public')));
+//Configure miscellaneous
+require('./config/jobs')();
 
-// development only
-if ('development' === app.get('env')) {
-	app.use(express.errorHandler());
-	app.locals.pretty = true;
-}
-
-app.get('/', routes.index);
-app.get('/partials/:name', routes.partials);
-app.get('/helloWorld', api.helloWorld);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+//Start express
+var port = process.env.PORT || require('./config/config').port;
+app.listen(port);
+console.log('Express app started on port ' + port);
