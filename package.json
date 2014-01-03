@@ -11,6 +11,9 @@
 		"mongoose": "latest",
 		"mongodb" : "latest",
 		"lodash": "latest",
-		"later": "latest"
+		"later": "latest",
+		"request": "latest",
+		"cheerio": "latest",
+		"lodash": "latest"
 	}
 }
