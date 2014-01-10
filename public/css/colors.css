@@ -143,10 +143,3 @@ a:active {
   color: #ff851b;
   -webkit-transition: color .3s ease-in-out;
   transition: color .3s ease-in-out; }
-
-.test {
-  color: #0074d9; }
-
-nav i {
-  padding-left: 5px;
-  padding-right: 5px; }

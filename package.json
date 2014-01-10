@@ -14,6 +14,8 @@
 		"later": "latest",
 		"request": "latest",
 		"cheerio": "latest",
-		"lodash": "latest"
+		"lodash": "latest",
+		"underscore.string": "latest",
+		"winston": "latest"
 	}
 }

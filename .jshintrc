@@ -4,7 +4,7 @@
     "es5": true, // Allow EcmaScript 5 syntax.
     "esnext": true, // Allow ES.next specific features such as `const` and `let`.
     "bitwise": false, // Prohibit bitwise operators (&, |, ^, etc.).
-    "camelcase": false, // Permit only camelcase for `var` and `object indexes`.
+    "camelcase": true, // Permit only camelcase for `var` and `object indexes`.
     "curly": false, // Require {} for every new block or scope.
     "eqeqeq": true, // Require triple equals i.e. `===`.
     "immed": true, // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
@@ -14,8 +14,9 @@
     "quotmark": "single", // Define quotes to string values.
     "regexp": true, // Prohibit `.` and `[^...]` in regular expressions.
     "undef": true, // Require all non-global variables be declared before they are used.
-    "unused": true, // Warn unused variables.
-    "strict": false, // Require `use strict` pragma in every file.
+    "unused": false, // Warn unused variables.
+	"expr": true, //his option suppresses warnings about the use of expressions where normally you would expect to see assignments or function calls.
+    "strict": true, // Require `use strict` pragma in every file.
     "trailing": true, // Prohibit trailing whitespaces.
     "smarttabs": false, // Suppresses warnings about mixed tabs and spaces
     "globals": { // Globals variables.

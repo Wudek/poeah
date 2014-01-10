@@ -1,7 +1,7 @@
-$someColor: #0051ff;
+@import "colors";
 
 .test {
-  color: $someColor;
+  color: $blue;
 }
 
 nav{

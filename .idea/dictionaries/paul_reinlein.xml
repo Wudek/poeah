@@ -2,9 +2,11 @@
   <dictionary name="paul.reinlein">
     <words>
       <w>jsonp</w>
+      <w>lodash</w>
       <w>mongo</w>
       <w>poeah</w>
       <w>subforum</w>
+      <w>subforums</w>
     </words>
   </dictionary>
 </component>

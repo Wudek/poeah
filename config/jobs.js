@@ -9,6 +9,13 @@ module.exports = function ()
 //	var updateSchedule = later.parse.text('every 30 s');
 //	later.setInterval(jobs.updateItems, updateSchedule);
 
-	jobs.updateItems();
-
+	var preClear = false;
+	if(preClear)
+	{
+		jobs.clearAndScan();
+	}
+	else
+	{
+		jobs.fullScan();
+	}
 };

@@ -2,74 +2,30 @@
 var cheerio = require('cheerio');
 var request = require('request');
 var _ = require('lodash');
+var leaguesController = require('./controllers/leaguesController');
+var PopulateForumsJob = require('./jobs/PopulateForumsJob').PopulateForumsJob;
+var ScanForumsJob = require('./jobs/ScanForumsJobs').ScanForumsJobs;
+var ClearDBJob = require('./jobs/ClearDBJob').ClearDBJob;
 
-module.exports.getForums = function()
+module.exports.populateForums = function()
 {
-	var baseUrl = 'http://www.pathofexile.com';
+	new PopulateForumsJob().run();
+};
 
-	function isValidForumName(name)
-	{
-		if(name.indexOf('Trading') === -1)
-		{
-			return false;
-		}
-		if(name.indexOf('Shops') !== -1)
-		{
-			return true;
-		}
-		if(name.indexOf('Buying') !== -1)
-		{
-			return true;
-		}
-		if(name.indexOf('Selling') !== -1)
-		{
-			return true;
-		}
-		return false;
-	}
-
-	function getForumName(subforum)
-	{
-		return subforum.children[0].data;
-	}
-
-	function isValidForum(subforum)
-	{
-		return isValidForumName(getForumName(subforum));
-	}
-
-	function createForumObject(subforum)
-	{
-		var splitName = getForumName(subforum).split(' ');
-		var leagueName = _(splitName).first();
-		var forumTypeName = _(splitName).last();
-		var url = baseUrl + subforum.attribs.href;
-		return {
-			league: leagueName,
-			type: forumTypeName,
-			url : url
-		};
-	}
-
-	function parseHtml(err, resp, html)
-	{
-		if (err) return console.error(err);
-		var parsedHtml = cheerio.load(html);
-		var subForums = parsedHtml('.forum_name').find('.name').find('a');
-		_(subForums).forEach(function(subforum)
-		{
-			if(isValidForum(subforum))
-			{
-				var subForum = createForumObject(subforum);
-				console.log(subForum);
-			}
-		});
-	}
-
-	request(baseUrl + '/forum', parseHtml);
-}
-
-module.exports.updateItems = function()
+module.exports.scanForums = function()
 {
-	module.exports.getForums();
+	new ScanForumsJob().run();
+};
+
+var fullScan = module.exports.fullScan = function()
+{
+	new PopulateForumsJob().run(function()
+	{
+		new ScanForumsJob().run();
+	});
+};
+
+var clearAndScan = module.exports.clearAndScan = function()
+{
+	new ClearDBJob().run(fullScan);
 };
